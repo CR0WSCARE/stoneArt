@@ -1,25 +1,23 @@
 <template>
-    <div class="page-container">
-        <h1 class="gradient-title">永信石雕</h1>
-        <TabPanel :tabs="tabs" v-model="currentTab">
-            <div v-if="currentTab === 0">
-                <p>欢迎来到永信石雕的官方网站！</p>
+    <h1 class="gradient-title">永信石雕</h1>
+    <TabPanel :tabs="tabs" v-model="currentTab">
+        <div v-if="currentTab === 0">
+            <p>欢迎来到永信石雕的官方网站！</p>
+        </div>
+        <div v-if="currentTab === 1">
+            <p>永信石雕专注于传统石雕艺术的传承与创新。</p>
+        </div>
+        <div v-if="currentTab === 2">
+            <p>这里展示我们的精品石雕作品。</p>
+            <div class="products-container">
+                <Product v-for="product in products" :key="product.id" :product="product" />
             </div>
-            <div v-if="currentTab === 1">
-                <p>永信石雕专注于传统石雕艺术的传承与创新。</p>
-            </div>
-            <div v-if="currentTab === 2">
-                <p>这里展示我们的精品石雕作品。</p>
-                <div class="products-container">
-                    <Product v-for="product in products" :key="product.id" :product="product" />
-                </div>
-            </div>
-            <div v-if="currentTab === 3">
-                <p>如需了解更多信息，请联系我们。</p>
-                <p>拼多多店铺：<a href="https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622" target="_blank">永信石雕</a></p>
-            </div>
-        </TabPanel>
-    </div>
+        </div>
+        <div v-if="currentTab === 3">
+            <p>如需了解更多信息，请联系我们。</p>
+            <p>拼多多店铺：<a href="https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622" target="_blank">永信石雕</a></p>
+        </div>
+    </TabPanel>
 </template>
 
 <script>
