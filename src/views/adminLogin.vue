@@ -9,18 +9,28 @@
                     ref="loginForm"
                     :model="loginForm"
                     label-width="80px"
-                >
+                    >
                     <el-form-item label="" class="login-title">
-                        <h2>永信石雕管理员登录</h2>
+                        <h2>管理员登录</h2>
                     </el-form-item>
-                    <el-form-item label="用户名">
+                    <el-form-item label="用户名" prop="username">
                         <el-input v-model="loginForm.username" style="width: 60%;"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码">
-                        <el-input v-model="loginForm.password" type="password" style="width: 60%;"></el-input>
+                    <el-form-item label="密码" prop="password">
+                        <el-input v-model="loginForm.password" show-password style="width: 60%;"></el-input>
+                    </el-form-item>
+                    <el-form-item label="验证码" prop="captcha">
+                        <div style="display: flex;">
+                            <el-input style="flex: 1"></el-input>
+                            <div style="flex: 1">
+                                
+                            </div>
+                        </div>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" style="width: 60%;" @click="loginForm">登         录</el-button>
                     </el-form-item>
                 </el-form>
-                <el-button type="primary" @click="login" style="margin-top: 20px;margin-left: 150px;">登录</el-button>
             </div>
         </div>
     </div>
