@@ -9,7 +9,9 @@
         </div>
         <div v-if="currentTab === 2">
             <p>这里展示我们的精品石雕作品。</p>
-            <Product :product="{ name: '精品石雕', description: '精美的手工石雕作品', price: '￥999', image: require('@/assets/logo.png') }" />
+            <div class="products-container">
+                <Product v-for="product in products" :key="product.id" :product="product" />
+            </div>
         </div>
         <div v-if="currentTab === 3">
             <p>如需了解更多信息，请联系我们。</p>
@@ -36,8 +38,21 @@ export default {
                 { title: '关于' },
                 { title: '产品' },
                 { title: '联系我们' }
+            ],
+            products: [
+                { id: 1, name: '精品石雕', description: '精美的手工石雕作品', price: '￥999', image: require('@/assets/logo.png'), purchaseUrl: 'https://www.baidu.com' }
+                // 可以在此添加更多产品
             ]
         }
     }
 }
 </script>
+
+<style scoped>
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -16px; /* 抵消子元素的margin */
+  overflow: hidden; /* 清除浮动 */
+}
+</style>
