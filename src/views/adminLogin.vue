@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h1>登录</h1>
+    <div class="login-container">
     </div>
 </template>
 
@@ -11,7 +10,12 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    color: #333;
+.login-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0f9876;
 }
 </style>

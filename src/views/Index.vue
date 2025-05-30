@@ -1,23 +1,25 @@
 <template>
-    <h1 class="gradient-title">永信石雕</h1>
-    <TabPanel :tabs="tabs" v-model="currentTab">
-        <div v-if="currentTab === 0">
-            <p>欢迎来到永信石雕的官方网站！</p>
-        </div>
-        <div v-if="currentTab === 1">
-            <p>永信石雕专注于传统石雕艺术的传承与创新。</p>
-        </div>
-        <div v-if="currentTab === 2">
-            <p>这里展示我们的精品石雕作品。</p>
-            <div class="products-container">
-                <Product v-for="product in products" :key="product.id" :product="product" />
+    <div class="page-container">
+        <h1 class="gradient-title">永信石雕</h1>
+        <TabPanel :tabs="tabs" v-model="currentTab">
+            <div v-if="currentTab === 0">
+                <p>欢迎来到永信石雕的官方网站！</p>
             </div>
-        </div>
-        <div v-if="currentTab === 3">
-            <p>如需了解更多信息，请联系我们。</p>
-            <p>拼多多店铺：<a href="https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622" target="_blank">永信石雕</a></p>
-        </div>
-    </TabPanel>
+            <div v-if="currentTab === 1">
+                <p>永信石雕专注于传统石雕艺术的传承与创新。</p>
+            </div>
+            <div v-if="currentTab === 2">
+                <p>这里展示我们的精品石雕作品。</p>
+                <div class="products-container">
+                    <Product v-for="product in products" :key="product.id" :product="product" />
+                </div>
+            </div>
+            <div v-if="currentTab === 3">
+                <p>如需了解更多信息，请联系我们。</p>
+                <p>拼多多店铺：<a href="https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622" target="_blank">永信石雕</a></p>
+            </div>
+        </TabPanel>
+    </div>
 </template>
 
 <script>
@@ -71,17 +73,29 @@ export default {
 </script>
 
 <style scoped>
+.page-container {
+    padding-top: 40px;
+    text-align: center;  /* 添加这行使容器内所有文字居中 */
+}
+
 .products-container {
     display: flex;
     flex-wrap: wrap;
     margin: -16px;
     overflow: hidden;
 }
+
 .gradient-title {
     color: #2193b0;
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 添加段落文字样式 */
+p {
+    text-align: center;
+    margin: 10px 0;
 }
 </style>
