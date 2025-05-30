@@ -1,5 +1,5 @@
 <template>
-    <h1>永信石雕</h1>
+    <h1 class="gradient-title">永信石雕</h1>
     <TabPanel :tabs="tabs" v-model="currentTab">
         <div v-if="currentTab === 0">
             <p>欢迎来到永信石雕的官方网站！</p>
@@ -27,8 +27,8 @@ import Product from './Product.vue'
 export default {
     name: 'Index',
     components: {
-        TabPanel
-        , Product
+        TabPanel,
+        Product
     },
     data() {
         return {
@@ -40,8 +40,30 @@ export default {
                 { title: '联系我们' }
             ],
             products: [
-                { id: 1, name: '精品石雕', description: '精美的手工石雕作品', price: '￥999', image: require('@/assets/logo.png'), purchaseUrl: 'https://www.baidu.com' }
-                // 可以在此添加更多产品
+                {
+                    id: 1,
+                    name: '精品石雕',
+                    description: '精美的手工石雕作品',
+                    price: '￥999',
+                    image: require('@/assets/logo.png'),
+                    purchaseUrl: 'https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622'
+                },
+                {
+                    id: 2,
+                    name: '传统石雕',
+                    description: '传承千年的传统石雕艺术',
+                    price: '￥1999',
+                    image: require('@/assets/logo.png'),
+                    purchaseUrl: 'https://www.baidu.com'
+                },
+                {
+                    id: 3,
+                    name: '现代石雕',
+                    description: '结合现代艺术的创新石雕',
+                    price: '￥2999',
+                    image: require('@/assets/logo.png'),
+                    purchaseUrl: 'https://mobile.yangkeduo.com/mall_page.html?mall_id=762651622'
+                }
             ]
         }
     }
@@ -50,9 +72,18 @@ export default {
 
 <style scoped>
 .products-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -16px; /* 抵消子元素的margin */
-  overflow: hidden; /* 清除浮动 */
+    display: flex;
+    flex-wrap: wrap;
+    margin: -16px;
+    overflow: hidden;
+}
+.gradient-title {
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
