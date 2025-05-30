@@ -78,9 +78,7 @@ export default {
     overflow: hidden;
 }
 .gradient-title {
-    background: linear-gradient(45deg, #2193b0, #6dd5ed);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2193b0;
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 20px;
