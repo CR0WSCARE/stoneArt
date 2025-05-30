@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import TabPanel from './TabPanel.vue'
-import Product from './Product.vue'
+import TabPanel from '@/components/TabPanel.vue'
+import Product from '@/components/Product.vue'
 
 export default {
     name: 'Index',
