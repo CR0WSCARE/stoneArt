@@ -89,6 +89,7 @@ export default {
     text-align: center;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
 }
 
 /* 添加段落文字样式 */

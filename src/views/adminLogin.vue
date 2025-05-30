@@ -21,9 +21,8 @@
                     </el-form-item>
                     <el-form-item label="验证码" prop="captcha">
                         <div style="display: flex;">
-                            <el-input style="flex: 1"></el-input>
+                            <el-input v-model="loginForm.captcha" style="flex: 1"></el-input>
                             <div style="flex: 1">
-                                
                             </div>
                         </div>
                     </el-form-item>
