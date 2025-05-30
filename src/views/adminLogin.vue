@@ -8,26 +8,34 @@
                 <el-form 
                     ref="loginForm"
                     :model="loginForm"
+                    :rules="rules"
                     label-width="80px"
-                    >
+                >
                     <el-form-item label="" class="login-title">
                         <h2>管理员登录</h2>
                     </el-form-item>
                     <el-form-item label="用户名" prop="username">
-                        <el-input v-model="loginForm.username" style="width: 60%;"></el-input>
+                        <el-input 
+                            v-model="loginForm.username" 
+                            :prefix-icon="User"
+                            placeholder="请输入用户名"
+                            style="width: 60%;">
+                        </el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
-                        <el-input v-model="loginForm.password" show-password style="width: 60%;"></el-input>
+                        <el-input 
+                            v-model="loginForm.password" 
+                            :prefix-icon="Lock"
+                            type="password"
+                            placeholder="请输入密码"
+                            style="width: 60%;">
+                        </el-input>
                     </el-form-item>
-                    <el-form-item label="验证码" prop="captcha">
-                        <div style="display: flex;">
-                            <el-input v-model="loginForm.captcha" style="flex: 1"></el-input>
-                            <div style="flex: 1">
-                            </div>
-                        </div>
-                    </el-form-item>
+                    
                     <el-form-item>
-                        <el-button type="primary" style="width: 60%;" @click="loginForm">登         录</el-button>
+                        <el-button type="primary" @click="handleSubmit" style="width: 60%">
+                            登  录
+                        </el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -36,14 +44,56 @@
 </template>
 
 <script>
+import { User, Lock } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+
 export default {
     name: 'AdminLogin',
+    setup() {
+        return {
+            User,
+            Lock
+        }
+    },
     data() {
         return {
             loginForm: {
                 username: '',
                 password: ''
+            },
+            rules: {
+                username: [
+                    { required: true, message: '请输入用户名', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'blur' },
+                    { min: 6, message: '密码长度至少为6位', trigger: 'blur' }
+                ]
             }
+        }
+    },
+    methods: {
+        handleSubmit() {
+            this.$refs.loginForm.validate((valid) => {
+                if (valid) {
+                    // 这里添加登录逻辑
+                    console.log('登录表单:', this.loginForm)
+                    // 示例：调用登录API
+                    this.$axios.post('/api/login', this.loginForm)
+                        .then(response => {
+                            if (response.data.success) {
+                                ElMessage.success('登录成功')
+                                this.$router.push('/admin/dashboard')
+                            } else {
+                                ElMessage.error(response.data.message)
+                            }
+                        })
+                        .catch(error => {
+                            ElMessage.error('登录失败，请稍后重试')
+                            console.error('登录错误:', error)
+                        })
+                }
+            })
         }
     }
 }
