@@ -35,13 +35,13 @@
                         <div style="display: flex;height: 32px; width: 210px;">
                             <el-input style="flex: 1;" v-model="loginForm.captcha"></el-input>
                             <div style="flex: 1;">
-                                <valid-code />
+                                <valid-code @update:value="getCode"/>
                             </div>
                         </div>
                     </el-form-item>
                     
                     <el-form-item>
-                        <el-button type="primary" @click="handleSubmit" style="width: 60%">
+                        <el-button type="primary" @click="login" style="width: 60%">
                             登  录
                         </el-button>
                     </el-form-item>
@@ -54,7 +54,6 @@
 <script>
 import ValidCode from '@/components/ValidCode.vue'
 import { User, Lock } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 
 export default {
     name: 'AdminLogin',
@@ -69,9 +68,11 @@ export default {
     },
     data() {
         return {
+            captcha: '',// 验证码组件传递
             loginForm: {
                 username: '',
-                password: ''
+                password: '',
+                captcha: ''
             },
             rules: {
                 username: [
@@ -87,27 +88,12 @@ export default {
         }
     },
     methods: {
-        handleSubmit() {
-            this.$refs.loginForm.validate((valid) => {
-                if (valid) {
-                    // 这里添加登录逻辑
-                    console.log('登录表单:', this.loginForm)
-                    // 示例：调用登录API
-                    this.$axios.post('/api/login', this.loginForm)
-                        .then(response => {
-                            if (response.data.success) {
-                                ElMessage.success('登录成功')
-                                this.$router.push('/admin/dashboard')
-                            } else {
-                                ElMessage.error(response.data.message)
-                            }
-                        })
-                        .catch(error => {
-                            ElMessage.error('密码或用户名错误')
-                            console.error('登录错误:', error)
-                        })
-                }
-            })
+        getCode(code) {
+            console.log(code)
+            this.captcha = code;
+        },
+        login() {
+            console.log(this.captcha)
         }
     }
 }
