@@ -19,7 +19,7 @@
                             v-model="loginForm.username" 
                             :prefix-icon="User"
                             placeholder="请输入用户名"
-                            style="width: 60%;">
+                            style="width: 210px;">
                         </el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
@@ -28,8 +28,16 @@
                             :prefix-icon="Lock"
                             type="password"
                             placeholder="请输入密码"
-                            style="width: 60%;">
+                            style="width: 210px;">
                         </el-input>
+                    </el-form-item>
+                    <el-form-item label="验证码" prop="captcha">
+                        <div style="display: flex;height: 32px; width: 210px;">
+                            <el-input style="flex: 1;" v-model="loginForm.captcha"></el-input>
+                            <div style="flex: 1;">
+                                <valid-code />
+                            </div>
+                        </div>
                     </el-form-item>
                     
                     <el-form-item>
@@ -44,11 +52,15 @@
 </template>
 
 <script>
+import ValidCode from '@/components/ValidCode.vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 
 export default {
     name: 'AdminLogin',
+    components: {
+        ValidCode
+    },
     setup() {
         return {
             User,
@@ -67,7 +79,9 @@ export default {
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
-                    { min: 6, message: '密码长度至少为6位', trigger: 'blur' }
+                ],
+                captcha: [
+                    { required: true, message: '请输入验证码', trigger: 'blur' }
                 ]
             }
         }
@@ -89,7 +103,7 @@ export default {
                             }
                         })
                         .catch(error => {
-                            ElMessage.error('登录失败，请稍后重试')
+                            ElMessage.error('密码或用户名错误')
                             console.error('登录错误:', error)
                         })
                 }
