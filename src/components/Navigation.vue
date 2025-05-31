@@ -2,10 +2,11 @@
   <div class="nav-wrapper">
     <h1 class="main-title">永信石雕</h1>
     <div class="nav-container">
-      <router-link to="/" class="nav-item">首页</router-link>
+      <router-link to="/home" class="nav-item">首页</router-link>
       <router-link to="/about" class="nav-item">关于</router-link>
       <router-link to="/products" class="nav-item">产品</router-link>
       <router-link to="/contact" class="nav-item">联系我们</router-link>
+      
     </div>
   </div>
 </template>
