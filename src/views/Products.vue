@@ -24,8 +24,24 @@ export default {
   mounted(){
     axios.get('http://localhost:8081/products')
         .then(res=>{
-            console.log(res.data);
+            console.log(res.data)
+            this.products = res.data
         })
   }
 }
 </script>
+
+<style scoped>
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -16px;
+  justify-content: flex-start;
+}
+
+.page-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+</style>

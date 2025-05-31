@@ -1,24 +1,35 @@
 <template>
   <div class="product">
     <div class="product-image">
-      <img :src="product.image" :alt="product.name" v-if="product.image">
+      <img 
+        :src="imageUrl" 
+        :alt="product.name"
+      />
     </div>
     <div class="product-info">
       <h1>{{ product.name }}</h1>
       <p>{{ product.description }}</p>
       <p class="price">价格: {{ product.price }}</p>
-        <button @click="goToPurchasePage">立即购买</button>
+      <button @click="goToPurchasePage">立即购买</button>
     </div>
   </div>
 </template>
 
 <script>
+import defaultImage from '@/assets/logo.png'  // 导入默认图片
+
 export default {
   name: "Product",
   props: {
     product: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    imageUrl() {
+      // 检查图片URL是否存在且有效
+      return this.product.image || defaultImage
     }
   },
   methods: {
@@ -35,50 +46,83 @@ export default {
   border: 1px solid #eee;
   padding: 16px;
   margin: 16px;
-  display: flex;
-  align-items: start;
-  gap: 20px;
-  width: calc(50% - 32px); /* 减去左右margin的值 */
+  width: calc(50% - 32px);
   box-sizing: border-box;
-  float: left;
+  display: flex;
+  flex-direction: row; /* 改为横向排列 */
+  align-items: flex-start; /* 顶部对齐 */
+  transition: all 0.3s ease;
+  gap: 16px; /* 添加间距 */
+}
+
+.product:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .product-image {
-  flex: 0 0 150px; /* 减小图片容器的宽度 */
+  width: 40%; /* 调整图片区域宽度 */
+  flex-shrink: 0; /* 防止图片区域被压缩 */
 }
 
 .product-image img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 150px; /* 调整图片高度 */
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .product-info {
-  flex: 1;
-  text-align: left;
+  width: 60%; /* 调整信息区域宽度 */
+  text-align: left; /* 左对齐文本 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px; /* 与图片高度保持一致 */
 }
 
 .product-info h1 {
-  font-size: 1.2em; /* 减小标题大小 */
+  font-size: 2em;
   margin-bottom: 8px;
+  text-align: center; /* 标题居中 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
 }
 
-.price {
+.product-info p {
+  margin: 4px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 36px;
+  font-size: 0.9em; /* 减小描述文字大小 */
+  color: #666; /* 使描述文字颜色更浅 */
+  line-height: 1.4;
+}
+
+.product-info .price {  /* 增加特异性 */
   font-size: 1.1em;
-  color: #e53935;
+  color: #e53935 !important;  /* 添加 !important 确保样式生效 */
   font-weight: bold;
-  margin-top: 8px;
+  margin: 8px 0;
+  text-align: center;  /* 价格居中显示 */
 }
 
 button {
-  margin-top: 10px;
-  padding: 8px 16px;
+  width: 60%;
+  align-self: center;
+  padding: 6px 12px;
   background-color: #e53935;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9em;
 }
 
 button:hover {
