@@ -9,6 +9,7 @@
 
 <script>
 import Product from '@/components/Product.vue'
+import axios from 'axios';
 
 export default {
   name: 'Products',
@@ -20,11 +21,11 @@ export default {
       products: []
     }
   },
-  mounted() {
-    this.$axios.get('https://localhost:8081/products')
-      .then(response => {
-        this.products = response.data
-      })
+  mounted(){
+    axios.get('http://localhost:8081/products')
+        .then(res=>{
+            console.log(res.data);
+        })
   }
 }
 </script>
