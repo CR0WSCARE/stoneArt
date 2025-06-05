@@ -65,7 +65,7 @@
                     <el-upload
                         class="upload-demo"
                         :headers="{token: user.token}"
-                        :action="`http://localhost:8000/uploadImage`"
+                        :action="uploadUrl"
                         name="file"
                         :show-file-list="false"
                         :on-success="handleUploadSuccess"
@@ -94,7 +94,7 @@
 
 <script>
 import { ElMessageBox, ElMessage } from 'element-plus'
-import { serverUrl } from '@/utils/request'
+import request from '@/utils/request'
 
 export default {
     name: 'Products',
@@ -110,6 +110,7 @@ export default {
                 purchaseurl: ''
             },
             user: JSON.parse(localStorage.getItem('honey-user')) || {},
+            uploadUrl: `${request.defaults.baseURL}/uploadImage`,
             
             rules: {
                 name: [

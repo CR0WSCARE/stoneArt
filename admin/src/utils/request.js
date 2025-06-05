@@ -1,11 +1,30 @@
-import router from "@/route";
 import axios from "axios";
 
+// 创建请求实例
 const request = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://localhost:8000', // 默认值
     timeout: 30000
 });
 
+// 更新配置的函数
+const updateConfig = async () => {
+    try {
+        const response = await axios.get('/config.json');
+        if (response.data && response.data.serverUrl) {
+            request.defaults.baseURL = response.data.serverUrl;
+            if (response.data.timeout) {
+                request.defaults.timeout = response.data.timeout;
+            }
+        }
+    } catch (error) {
+        console.error('配置文件加载失败:', error);
+    }
+};
+
+// 初始化配置
+updateConfig();
+
+// 请求拦截器
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=UTF-8';
     let user = JSON.parse(localStorage.getItem("honey-user")||'{}');
@@ -16,6 +35,7 @@ request.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
+// 响应拦截器
 request.interceptors.response.use(
     response=>{
         let res = response.data;
@@ -33,4 +53,4 @@ request.interceptors.response.use(
     }
 )
 
-export default request;
+export default request
