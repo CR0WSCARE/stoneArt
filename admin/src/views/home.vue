@@ -25,9 +25,22 @@ export default {
         return {
         };
     },
+    mounted() {
+        // 添加关闭窗口事件监听
+        window.addEventListener('beforeunload', this.handleBeforeUnload);
+    },
     unmounted() {
-        localStorage.removeItem('honey-user'); // 清除登录状态
-        this.$router.push('/admin/login'); // 跳转到登录页面
+        // 移除事件监听
+        window.removeEventListener('beforeunload', this.handleBeforeUnload);
+        this.clearLoginStatus();
+    },
+    methods: {
+        handleBeforeUnload() {
+            this.clearLoginStatus();
+        },
+        clearLoginStatus() {
+            localStorage.removeItem('honey-user');
+        }
     }
 };
 </script>
