@@ -65,7 +65,7 @@
                     <el-upload
                         class="upload-demo"
                         :headers="{token: user.token}"
-                        :action="`{{ serverUrl }}/uploadImage`"
+                        :action="`http://localhost:8000/uploadImage`"
                         name="file"
                         :show-file-list="false"
                         :on-success="handleUploadSuccess"
