@@ -25,3 +25,8 @@ app.mount('#app')
 
 // 配置 axios
 app.config.globalProperties.$axios = axios
+
+axios.get('/config.json').then((res)=>{
+  app.config.globalProperties.$config = res.data
+})
+export const globals = app.config.globalProperties

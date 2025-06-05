@@ -1,7 +1,10 @@
 import axios from "axios";
+import {globals} from "@/main"
+
+const serverUrl = globals.$config?.serverUrl || 'http://localhost:8000'
 
 const request = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: serverUrl,
     timeout: 30000
 })
 
